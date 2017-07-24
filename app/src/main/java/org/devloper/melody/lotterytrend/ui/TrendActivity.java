@@ -17,13 +17,17 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.devloper.melody.lotterychart.model.TrendModel;
+import org.devloper.melody.lotterychart.widget.HeadCustomGridView;
+import org.devloper.melody.lotterychart.widget.HeaderHorizontalScrollView;
+import org.devloper.melody.lotterychart.widget.LeftNumberCustomListView;
+import org.devloper.melody.lotterychart.widget.LeftNumberSynchScrollView;
+import org.devloper.melody.lotterychart.widget.ScrollChangeCallback;
+import org.devloper.melody.lotterychart.widget.TrendScrollViewWidget;
+import org.devloper.melody.lotterychart.widget.TrendView;
 import org.devloper.melody.lotterytrend.R;
-import org.devloper.melody.lotterytrend.dao.ScrollChangeCallback;
-import org.devloper.melody.lotterytrend.widget.HeadCustomGridView;
-import org.devloper.melody.lotterytrend.widget.LeftNumberCustomListView;
-import org.devloper.melody.lotterytrend.widget.LeftNumberSynchScrollView;
-import org.devloper.melody.lotterytrend.widget.TrendScrollViewWidget;
-import org.devloper.melody.lotterytrend.widget.HeaderHorizontalScrollView;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -43,6 +47,7 @@ public class TrendActivity extends AppCompatActivity implements ScrollChangeCall
     private LeftNumberCustomListView mListView;
     private GridView  mHeadGridView;
     private GridView mFooterGridView;
+    private TrendView mTendView;
     private List mList = null;
     private List mHeadData=null;
     //选好了
@@ -72,6 +77,7 @@ public class TrendActivity extends AppCompatActivity implements ScrollChangeCall
         mFooterScroll= (HeaderHorizontalScrollView) findViewById(R.id.trend_footer_scroll);
         mTrendSelectBtn= (ImageView) findViewById(R.id.iv_trend_yes);
         mTvResult= (TextView) findViewById(R.id.tv_result);
+        mTendView= (TrendView) findViewById(R.id.trend_view);
         //左边期号的监听器
         mLeftScroll.setScrollViewListener(this);
         //中间走势图的监听器
@@ -87,6 +93,8 @@ public class TrendActivity extends AppCompatActivity implements ScrollChangeCall
                 dealSelectData();
             }
         });
+
+        mTendView.initData(new ArrayList<TrendModel>());
         //绑定显示期号数据
         bindQiHaoData();
         //走势图顶部区域数据显示
